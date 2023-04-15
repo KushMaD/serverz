@@ -11,7 +11,8 @@ class ChatServer:
         self.users_connected = list()
         self.symmetric_key = None
 
-        self.server = socket.create_server((ip, port))
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server.bind((ip, port))
         self.server.listen(0)  # Можно установить ограничение, 0 - без ограничений
 
         threading.Thread(target=self.connect_handler).start()  # В отдельном потоке обрабатываем подключения
